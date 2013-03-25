@@ -4,7 +4,12 @@ class Runner:
 
     def parse(self, command):
         action, subject = command.split(' ')
-        return getattr(self.env[subject], action)
+        return getattr(
+            self.env[subject],
+            action,
+            lambda: "You can't {} the {}".format(
+                action, subject)
+        )
 
     def main(self):
         print("Hello, you're in The Room")
@@ -25,6 +30,13 @@ class Door:
             return "The Door is unlocked, now"
         else:
             return "The Door is already unlocked"
+
+    def lock(self):
+        if self.is_locked:
+            return "The Door is already locked"
+        else:
+            self.is_locked = True
+            return "The Door is locked, now"
 
 if __name__ == '__main__':
     Runner({'door': Door()}).main()

@@ -11,6 +11,10 @@ class RunnerTest(unittest.TestCase):
         command = self.runner.parse('unlock door')
         self.assertIsInstance(command.__self__, Door)
 
+    def test_handling_nonexistant_actions(self):
+        command = self.runner.parse('lick door')
+        self.assertFalse(hasattr(command, '__self__'))
+
 
 class DoorTests(unittest.TestCase):
     def setUp(self):
@@ -25,6 +29,11 @@ class DoorTests(unittest.TestCase):
         self.door.is_locked = False
         self.door.unlock()
         self.assertFalse(self.door.is_locked)
+
+    def test_lock_the_door(self):
+        self.door.is_locked = False
+        self.door.lock()
+        self.assertTrue(self.door.is_locked)
 
 if __name__ == '__main__':
     unittest.main()
