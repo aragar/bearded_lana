@@ -1,4 +1,5 @@
 bearded_lana
 ============
 
-Just some text-based RPG
+A text-based RPG intended as a demo on VCS/git/github for the
+"Programming Python" course in FMI - Sofia University
