@@ -12,5 +12,19 @@ class RunnerTest(unittest.TestCase):
         self.assertIsInstance(command.__self__, Door)
 
 
+class DoorTests(unittest.TestCase):
+    def setUp(self):
+        self.door = Door()
+
+    def test_the_door_can_be_unlocked(self):
+        self.door.is_locked = True
+        self.door.unlock()
+        self.assertFalse(self.door.is_locked)
+
+    def test_the_unlock_door_on_unlocked_door(self):
+        self.door.is_locked = False
+        self.door.unlock()
+        self.assertFalse(self.door.is_locked)
+
 if __name__ == '__main__':
     unittest.main()
